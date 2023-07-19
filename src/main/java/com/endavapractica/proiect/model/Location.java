@@ -1,19 +1,19 @@
 package com.endavapractica.proiect.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+@Entity
+@Table(name="Location")
 public class Location implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="location_id")
     private long locationId;
 
-    @Column(name="locationName")
+    @Column(name="location_name")
     private String locationName;
 
     @Column(name="capacity")

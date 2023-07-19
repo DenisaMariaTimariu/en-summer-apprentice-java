@@ -1,22 +1,22 @@
 package com.endavapractica.proiect.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
+@Entity
+@Table(name="Users")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="user_id")
     private long userId;
 
-    @Column(name="userName")
+    @Column(name="username")
     private String userName;
 
-    @Column(name="password")
-    private String password;
+    @Column(name="email")
+    private String email;
 
     public void setUserId(long userId) {
         this.userId = userId;
@@ -26,8 +26,8 @@ public class User implements Serializable {
         this.userName = userName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String email) {
+        this.email = email;
     }
 
     public long getUserId() {
@@ -38,7 +38,11 @@ public class User implements Serializable {
         return userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getEmail() {
+        return email;
+    }
+
+    User(){
+
     }
 }

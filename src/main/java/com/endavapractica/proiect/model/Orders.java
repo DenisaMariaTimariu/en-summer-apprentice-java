@@ -5,26 +5,39 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name="Orders")
 public class Orders implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="order_id")
     private long orderId;
 
-    @Column(name="orderDate")
+    @Column(name="ordered_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime orderedAt;
-    @Column(name="numberOfTickets")
+    private LocalDateTime orderDate;
+
+
+    @Column(name="number_of_tickets")
     private int numberOfTickets;
 
-    @Column(name="totalPrice")
+    @Column(name="total_price")
     private float totalPrice;
+
+    @ManyToOne
+    @Column(name="user_id")
+    private User userId;
+
+    @ManyToOne
+    @Column(name="ticket_category_id")
+    private TicketCategory ticketcategoryId;
 
     public long getOrderId() {
         return orderId;
     }
 
-    public LocalDateTime getOrderedAt() {
-        return orderedAt;
+    public LocalDateTime getOrderDate() {
+        return orderDate;
     }
 
     public int getNumberOfTickets() {
@@ -35,12 +48,20 @@ public class Orders implements Serializable {
         return totalPrice;
     }
 
+    public User getUserId() {
+        return userId;
+    }
+
+    public TicketCategory getTicketcategoryId() {
+        return ticketcategoryId;
+    }
+
     public void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 
-    public void setOrderedAt(LocalDateTime orderedAt) {
-        this.orderedAt = orderedAt;
+    public void setOrderDate(LocalDateTime orderDate) {
+        this.orderDate = orderDate;
     }
 
     public void setNumberOfTickets(int numberOfTickets) {
@@ -49,6 +70,14 @@ public class Orders implements Serializable {
 
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public void setUserId(User userId) {
+        this.userId = userId;
+    }
+
+    public void setTicketcategoryId(TicketCategory ticketcategoryId) {
+        this.ticketcategoryId = ticketcategoryId;
     }
 
     Orders(){

@@ -1,6 +1,7 @@
 package com.endavapractica.proiect.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CollectionId;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 
 import java.io.Serializable;
@@ -9,22 +10,35 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name="event")
+@Table(name="Event")
 public class Event implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="event_id")
     private long id;
 
-    @Column(name="name")
+    @Column(name="event_name")
     private String name;
-    @Column(name="description")
+    @Column(name="event_description")
     private String description;
-    @Column(name="startDate")
+    @Column(name="start_date")
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime startDate;
-    @Column(name="endDate")
+    @Column(name="end_date")
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime endDate;
+
+    @ManyToOne
+    @JoinColumn(name="location_id")
+    private Location locationId;
+
+    @ManyToOne
+    @JoinColumn(name="event_type_id")
+    private EventType eventTypeId;
+
+
+
+
 
     public long getId() {
         return id;
@@ -46,6 +60,14 @@ public class Event implements Serializable {
         return endDate;
     }
 
+    public Location getLocationId() {
+        return locationId;
+    }
+
+    public EventType getEventTypeId() {
+        return eventTypeId;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -64,6 +86,13 @@ public class Event implements Serializable {
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
+    }
+    public void setLocationId(Location locationId) {
+        this.locationId = locationId;
+    }
+
+    public void setEventTypeId(EventType eventTypeId) {
+        this.eventTypeId = eventTypeId;
     }
 
     Event(){
