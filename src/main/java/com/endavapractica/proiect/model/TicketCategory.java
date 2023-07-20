@@ -1,9 +1,13 @@
 package com.endavapractica.proiect.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
 @Entity
 @Table(name="TicketCategory")
 public class TicketCategory implements Serializable {
@@ -21,42 +25,9 @@ public class TicketCategory implements Serializable {
 
 
     @ManyToOne
-    @Column(name="event_id")
+    @JoinColumn(name="event_id")
     private Event eventId;
 
-    public long getTicketCategoryId() {
-        return TicketCategoryId;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-    public Event getEventId() {
-        return eventId;
-    }
-
-
-    public void setTicketCategoryId(long ticketCategoryId) {
-        TicketCategoryId = ticketCategoryId;
-    }
-
-
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-    public void setEventId(Event eventId) {
-        this.eventId = eventId;
-    }
     TicketCategory(){
 
     }

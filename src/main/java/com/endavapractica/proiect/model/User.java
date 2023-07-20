@@ -1,9 +1,13 @@
 package com.endavapractica.proiect.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
 @Entity
 @Table(name="Users")
 public class User implements Serializable {
@@ -17,30 +21,6 @@ public class User implements Serializable {
 
     @Column(name="email")
     private String email;
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setPassword(String email) {
-        this.email = email;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 
     User(){
 

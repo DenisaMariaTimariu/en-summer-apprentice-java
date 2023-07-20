@@ -1,9 +1,13 @@
 package com.endavapractica.proiect.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 
+@Getter
+@Setter
 @Entity
 @Table(name="Location")
 public class Location implements Serializable {
@@ -21,38 +25,6 @@ public class Location implements Serializable {
 
     @Column(name="type")
     private String type;
-
-    public void setLocationId(long locationId) {
-        this.locationId = locationId;
-    }
-
-    public void setLocationName(String locationName) {
-        this.locationName = locationName;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public long getLocationId() {
-        return locationId;
-    }
-
-    public String getLocationName() {
-        return locationName;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-
-    public String getType() {
-        return type;
-    }
 
     Location(){
 
