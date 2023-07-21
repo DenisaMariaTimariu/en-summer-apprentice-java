@@ -1,13 +1,15 @@
 package com.endavapractica.proiect.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name="Location")
 public class Location implements Serializable {
@@ -15,7 +17,7 @@ public class Location implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="location_id")
-    private long locationId;
+    private Integer locationId;
 
     @Column(name="location_name")
     private String locationName;
@@ -26,7 +28,5 @@ public class Location implements Serializable {
     @Column(name="type")
     private String type;
 
-    Location(){
 
-    }
 }

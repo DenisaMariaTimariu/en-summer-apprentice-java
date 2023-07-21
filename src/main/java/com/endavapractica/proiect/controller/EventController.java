@@ -17,24 +17,6 @@ import java.util.List;
 @RequestMapping
 public class EventController {
 
-    @Autowired
-    EventRepository eventRepository;
 
-    @GetMapping("/events")
-    public ResponseEntity<List<Event>> getAllEvents(@RequestParam(required = false) Integer EventID){
-        try{
-            List<Event> events = new ArrayList<>();
-            if(EventID == null)
-                eventRepository.findAll().forEach(events::add);
-            else
-                eventRepository.findAllByid(EventID).forEach(events::add);
-
-            if(events.isEmpty())
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            return new ResponseEntity<>(events, HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
 
 }

@@ -1,21 +1,23 @@
 package com.endavapractica.proiect.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 @Table(name="Orders")
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="order_id")
-    private long orderId;
+    private Integer orderId;
 
     @Column(name="ordered_at")
     @Temporal(TemporalType.TIMESTAMP)
@@ -37,9 +39,7 @@ public class Order implements Serializable {
     private TicketCategory ticketcategoryId;
 
 
-    Order(){
 
-    }
 
 
 
