@@ -1,11 +1,14 @@
 package com.endavapractica.proiect.controller;
 
+import com.endavapractica.proiect.model.Event;
 import com.endavapractica.proiect.service.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping
@@ -17,8 +20,9 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @GetMapping("/orders/{locationId}/{eventType}")
-    public ResponseEntity<?> getEvents (@PathVariable("location/eventType") Integer location_id, String event_type){
-        return ResponseEntity.ok(eventService.getEvents(location_id,event_type));
+    @GetMapping("/events/{locationId}/{eventType}")
+    public ResponseEntity<?> getEvents (@PathVariable Integer locationId, @PathVariable String eventType){
+        List<Event> events = eventService.getEvents(locationId,eventType);
+        return ResponseEntity.ok(events);
     }
 }

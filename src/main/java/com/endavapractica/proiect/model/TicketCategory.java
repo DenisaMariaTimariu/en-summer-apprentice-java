@@ -22,6 +22,7 @@ public class TicketCategory implements Serializable {
 
     @Column(name="description")
     private String description;
+
     @Column(name="price")
     private float price;
 

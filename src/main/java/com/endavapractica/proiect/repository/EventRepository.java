@@ -12,7 +12,6 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Integer> {
 
 
-   // List<Event> findAllByLocationId_locationIdAndEventTypeId_eventTypeId(Integer locationId, Integer eventTypeId);
 
     List<Event> findAllByLocationId_locationIdAndEventTypeId_eventTypeId(Integer locationId, Integer eventTypeId);
 }

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface EventService {
 
-    public List <Event> getEvents(Integer id, String description);
+    public List <Event> getEvents(Integer id, String eventType);
 }

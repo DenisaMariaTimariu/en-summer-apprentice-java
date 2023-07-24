@@ -25,7 +25,7 @@ public class EventServiceImpl implements EventService{
 
         EventType eventType1=eventTypeRepository.findByName(eventType);
 
-        List <Event> event=eventRepository.findAllByLocationId_locationIdAndEventTypeId_eventTypeId(locationId,eventType1.getEventTypeId());
-        return event;
+         return eventRepository.findAllByLocationId_locationIdAndEventTypeId_eventTypeId(locationId,eventType1.getEventTypeId());
+
     }
 }
