@@ -1,11 +1,9 @@
 package com.endavapractica.proiect.controller;
 
+import com.endavapractica.proiect.DTO.OrderDTO;
 import com.endavapractica.proiect.service.OrderService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -20,5 +18,10 @@ public class OrderController {
     @GetMapping("/orders/{costumerId}")
     public ResponseEntity<?> getOrder (@PathVariable("costumerId") Integer costumer_id){
         return ResponseEntity.ok(orderService.findOrderByCostumerId(costumer_id));
+    }
+
+    @PostMapping("/order")
+    public ResponseEntity<?> createOrder(@RequestBody OrderDTO orderDTO){
+        return ResponseEntity.ok(orderService.createOrder(orderDTO));
     }
 }

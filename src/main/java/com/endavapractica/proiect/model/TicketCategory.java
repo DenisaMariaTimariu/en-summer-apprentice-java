@@ -17,7 +17,7 @@ public class TicketCategory implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="ticket_category_id")
-    private Integer TicketCategoryId;
+    private Integer ticketCategoryId;
 
 
     @Column(name="description")

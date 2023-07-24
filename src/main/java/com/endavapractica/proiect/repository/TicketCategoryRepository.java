@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TicketCategoryRepository extends JpaRepository<TicketCategory,Integer> {
+    TicketCategory findByTicketCategoryIdAndEventId(Integer ticketCategoryId, Integer eventId);
 }

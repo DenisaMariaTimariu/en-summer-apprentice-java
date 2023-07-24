@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class Order implements Serializable {
 
     @Column(name="ordered_at")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime orderDate;
+    private Date orderDate;
 
 
     @Column(name="number_of_tickets")

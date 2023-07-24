@@ -35,11 +35,11 @@ public class Event implements Serializable {
 
     @Column(name="start_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime startDate;
+    private Date startDate;
 
     @Column(name="end_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private LocalDateTime endDate;
+    private Date endDate;
 
     @ManyToOne
     @JoinColumn(name="location_id")

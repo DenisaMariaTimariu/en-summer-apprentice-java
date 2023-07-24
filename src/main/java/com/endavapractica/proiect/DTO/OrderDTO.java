@@ -1,0 +1,19 @@
+package com.endavapractica.proiect.DTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderDTO {
+
+    private Integer costumerId=Integer.valueOf(1);
+    private Integer eventId;
+    private Integer ticketCategoryId;
+    private Integer numberOfTickets;
+}
