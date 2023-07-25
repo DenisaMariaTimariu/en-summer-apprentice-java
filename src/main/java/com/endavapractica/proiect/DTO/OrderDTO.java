@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class OrderDTO {
 
-    private Integer costumerId=Integer.valueOf(1);
-    private Integer eventId;
+    private Integer costumerId;
     private Integer ticketCategoryId;
     private Integer numberOfTickets;
 }
