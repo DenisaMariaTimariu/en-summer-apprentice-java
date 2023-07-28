@@ -1,6 +1,7 @@
 package com.endavapractica.proiect.service;
 
 import com.endavapractica.proiect.DTO.OrderDTO;
+import com.endavapractica.proiect.mapper.OrderMapper;
 import com.endavapractica.proiect.model.Order;
 import com.endavapractica.proiect.model.TicketCategory;
 import com.endavapractica.proiect.model.User;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService{
@@ -22,12 +24,13 @@ public class OrderServiceImpl implements OrderService{
     private final UserRepository userRepository;
     private final TicketCategoryRepository ticketCategoryRepository;
     private  final EventRepository eventRepository;
-
-    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository, TicketCategoryRepository ticketCategoryRepository, EventRepository eventRepository) {
+    private final OrderMapper orderMapper;
+    public OrderServiceImpl(OrderRepository orderRepository, UserRepository userRepository, TicketCategoryRepository ticketCategoryRepository, EventRepository eventRepository, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
         this.userRepository = userRepository;
         this.ticketCategoryRepository = ticketCategoryRepository;
         this.eventRepository = eventRepository;
+        this.orderMapper = orderMapper;
     }
 
     @Override
@@ -39,22 +42,26 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public Order createOrder(OrderDTO orderDTO) {
-        Order order = new Order();
-        User user = new User();
+
+        Order order = orderMapper.DtoToEntity(orderDTO);
+
+        User user = userRepository.findById(orderDTO.getCostumerId()).orElse(null);
+        TicketCategory ticketCategory = ticketCategoryRepository.findById(orderDTO.getTicketCategoryId()).orElse(null);
 
         order.setUserId(user);
-        order.setNumberOfTickets(orderDTO.getNumberOfTickets());
+        order.setTicketcategoryId(ticketCategory);
 
         ZoneId defaultZoneId = ZoneId.systemDefault();
         LocalDate now = LocalDate.now();
         Date date = Date.from(now.atStartOfDay(defaultZoneId).toInstant());
+
         order.setOrderDate(date);
 
-        TicketCategory ticketCategory = ticketCategoryRepository.findByTicketCategoryIdAndEventId(orderDTO.getTicketCategoryId(),orderDTO.getEventId());
+        TicketCategory ticketCategory1 = ticketCategoryRepository.findByTicketCategoryIdAndEventId(orderDTO.getTicketCategoryId(),orderDTO.getEventId());
 
-        float totalPrice=ticketCategory.getPrice()*orderDTO.getNumberOfTickets();
+        float totalPrice=ticketCategory1.getPrice()*orderDTO.getNumberOfTickets();
         order.setTotalPrice(totalPrice);
-        order.setTicketcategoryId(ticketCategory);
+        order.setTicketcategoryId(ticketCategory1);
 
         orderRepository.save(order);
 

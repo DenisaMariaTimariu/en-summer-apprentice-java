@@ -1,6 +1,7 @@
 package com.endavapractica.proiect.controller;
 
 import com.endavapractica.proiect.DTO.OrderDTO;
+import com.endavapractica.proiect.model.Order;
 import com.endavapractica.proiect.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,10 @@ public class OrderController {
         return ResponseEntity.ok(orderService.findOrderByCostumerId(costumer_id));
     }
 
+
     @PostMapping("/order")
     public ResponseEntity<?> createOrder(@RequestBody OrderDTO orderDTO){
+        Integer costumerId=1;
         return ResponseEntity.ok(orderService.createOrder(orderDTO));
     }
 }
