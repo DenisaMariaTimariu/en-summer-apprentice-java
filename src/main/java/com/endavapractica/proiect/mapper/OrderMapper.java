@@ -29,16 +29,6 @@ public class OrderMapper {
 
         order.setNumberOfTickets(orderDTO.getNumberOfTickets());
 
-        User user = new User();
-        user.setUserId(orderDTO.getCostumerId());
-        order.setUserId(user);
-
-        TicketCategory ticketCategory = new TicketCategory();
-        ticketCategory.setTicketCategoryId(orderDTO.getTicketCategoryId());
-        order.setTicketcategoryId(ticketCategory);
-
-
-
         return order;
 
 

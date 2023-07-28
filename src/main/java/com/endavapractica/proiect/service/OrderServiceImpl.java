@@ -46,22 +46,18 @@ public class OrderServiceImpl implements OrderService{
         Order order = orderMapper.DtoToEntity(orderDTO);
 
         User user = userRepository.findById(orderDTO.getCostumerId()).orElse(null);
-        TicketCategory ticketCategory = ticketCategoryRepository.findById(orderDTO.getTicketCategoryId()).orElse(null);
-
         order.setUserId(user);
-        order.setTicketcategoryId(ticketCategory);
 
         ZoneId defaultZoneId = ZoneId.systemDefault();
         LocalDate now = LocalDate.now();
         Date date = Date.from(now.atStartOfDay(defaultZoneId).toInstant());
-
         order.setOrderDate(date);
 
-        TicketCategory ticketCategory1 = ticketCategoryRepository.findByTicketCategoryIdAndEventId(orderDTO.getTicketCategoryId(),orderDTO.getEventId());
+        TicketCategory ticketCategory = ticketCategoryRepository.findByTicketCategoryIdAndEventId(orderDTO.getTicketCategoryId(),orderDTO.getEventId());
+        order.setTicketcategoryId(ticketCategory);
 
-        float totalPrice=ticketCategory1.getPrice()*orderDTO.getNumberOfTickets();
+        float totalPrice=ticketCategory.getPrice()*orderDTO.getNumberOfTickets();
         order.setTotalPrice(totalPrice);
-        order.setTicketcategoryId(ticketCategory1);
 
         orderRepository.save(order);
 
