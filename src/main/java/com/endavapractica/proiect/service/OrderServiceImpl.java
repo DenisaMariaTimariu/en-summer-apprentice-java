@@ -45,8 +45,7 @@ public class OrderServiceImpl implements OrderService{
 
         Order order = orderMapper.DtoToEntity(orderDTO);
 
-        User user = userRepository.findById(orderDTO.getCostumerId()).orElse(null);
-        order.setUserId(user);
+        order.getUserId();
 
         ZoneId defaultZoneId = ZoneId.systemDefault();
         LocalDate now = LocalDate.now();
@@ -61,7 +60,7 @@ public class OrderServiceImpl implements OrderService{
 
         orderRepository.save(order);
 
-        return null;
+        return order;
     }
 
 

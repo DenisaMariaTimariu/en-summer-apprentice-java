@@ -13,6 +13,7 @@ public class OrderMapper {
     public OrderDTO EntityToDto(Order order) {
 
         OrderDTO orderDTO = new OrderDTO();
+        Integer userId=Integer.valueOf(1);
 
         orderDTO.setCostumerId(order.getOrderId());
         orderDTO.setNumberOfTickets(order.getNumberOfTickets());
@@ -26,6 +27,7 @@ public class OrderMapper {
     public Order DtoToEntity(OrderDTO orderDTO) {
 
         Order order = new Order();
+        Integer userId=Integer.valueOf(1);
 
         order.setNumberOfTickets(orderDTO.getNumberOfTickets());
 

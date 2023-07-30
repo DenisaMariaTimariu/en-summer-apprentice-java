@@ -24,7 +24,6 @@ public class OrderController {
 
     @PostMapping("/order")
     public ResponseEntity<?> createOrder(@RequestBody OrderDTO orderDTO){
-        Integer costumerId=1;
         return ResponseEntity.ok(orderService.createOrder(orderDTO));
     }
 }
