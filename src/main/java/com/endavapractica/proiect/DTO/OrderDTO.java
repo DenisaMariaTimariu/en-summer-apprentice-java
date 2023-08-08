@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class OrderDTO {
 
     private Integer eventId;
-    private Integer costumerId;
     private Integer ticketCategoryId;
     private Integer numberOfTickets;
 

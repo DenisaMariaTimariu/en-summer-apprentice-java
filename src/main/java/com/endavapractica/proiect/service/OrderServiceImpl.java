@@ -2,6 +2,7 @@ package com.endavapractica.proiect.service;
 
 import com.endavapractica.proiect.DTO.OrderDTO;
 import com.endavapractica.proiect.mapper.OrderMapper;
+import com.endavapractica.proiect.model.Event;
 import com.endavapractica.proiect.model.Order;
 import com.endavapractica.proiect.model.TicketCategory;
 import com.endavapractica.proiect.model.User;
@@ -43,16 +44,25 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public Order createOrder(OrderDTO orderDTO) {
 
-        Order order = orderMapper.DtoToEntity(orderDTO);
 
-        order.getUserId();
+        Order order = orderMapper.DtoToEntity(orderDTO);
+        Integer userId = 1;
+        Optional<User> currentUser = userRepository.findById(userId);
+        if(currentUser.isPresent()){
+            order.setUserId(currentUser.get());
+        }
 
         ZoneId defaultZoneId = ZoneId.systemDefault();
         LocalDate now = LocalDate.now();
         Date date = Date.from(now.atStartOfDay(defaultZoneId).toInstant());
         order.setOrderDate(date);
 
-        TicketCategory ticketCategory = ticketCategoryRepository.findByTicketCategoryIdAndEventId(orderDTO.getTicketCategoryId(),orderDTO.getEventId());
+        Optional<Event> event=  eventRepository.findById(orderDTO.getEventId());
+        TicketCategory ticketCategory = new TicketCategory();
+        if(event.isPresent()){
+            ticketCategory = ticketCategoryRepository.findByTicketCategoryIdAndEventId(orderDTO.getTicketCategoryId(),event.get());
+            System.out.println(ticketCategory.getTicketCategoryId());
+        }
         order.setTicketcategoryId(ticketCategory);
 
         float totalPrice=ticketCategory.getPrice()*orderDTO.getNumberOfTickets();
